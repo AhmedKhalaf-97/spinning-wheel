@@ -83,24 +83,51 @@ function animateCat(startFrame, endFrame) {
 }
 
 
-const GRAVITATIONAL_CONSTANT = 6.67e-11;
-const GROUND_MASS = 6e24;
-
-function calcForce(mass, distance) {
-    return GRAVITATIONAL_CONSTANT * ((mass * GROUND_MASS) / (distance * distance));
-}
-
-
 const particlesCanvas = document.getElementById("particles-canvas");
+particlesCanvas.width = 300;
+particlesCanvas.height = 400;
+const ctx = particlesCanvas.getContext("2d");
 
-if (particlesCanvas.getContext) {
-    const ctx = particlesCanvas.getContext("2d");
-    // drawing code here
-} else {
-    // canvas-unsupported code here
+const heartImg = new Image();
+heartImg.src = "/images/heart01.png";
+
+const heart = {
+    x: 0,
+    y: 0,
+    vx: 0.1,
+    vy: 0.5,
+    draw() {
+        ctx.drawImage(heartImg, this.x, this.y, 64, 64);
+    }
 }
 
+// Fill array with objects.
+let heartObjs = new Array(4).fill().map(() => ({ ...heart }));
 
+// Initial Position.
+for (let i = 0; i < heartObjs.length; i++) {
+    heartObjs[i].x = particlesCanvas.width / 2;
+    heartObjs[i].y = particlesCanvas.height + (i * 50);
+}
+
+// Start drawing.
+heartImg.onload = () => {
+    draw();
+};
+
+// Animate and draw.
+function draw() {
+    ctx.clearRect(0, 0, particlesCanvas.width, particlesCanvas.height);
+
+    for (let i = 0; i < heartObjs.length; i++) {
+        heartObjs[i].draw();
+
+        // heartObjs[i].x += heartObjs[i].vx;
+        heartObjs[i].y -= heartObjs[i].vy;
+    }
+
+    window.requestAnimationFrame(draw);
+}
 
 
 // TODO:
