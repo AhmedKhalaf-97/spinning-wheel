@@ -7,6 +7,27 @@ let defaultSpinSpeed = 5;
 
 let isRotating = false;
 
+let bodyBackground = document.getElementById("body-background");
+
+decorateBackground();
+
+function decorateBackground() {
+    let horizontalCount = Math.floor(window.innerWidth * 0.012);
+    let vertialCount = Math.floor(window.innerHeight * 0.009);
+
+    console.log(horizontalCount);
+    console.log(vertialCount);
+    for (let i = 0; i < horizontalCount; i++) {
+        for (let j = 0; j < vertialCount; j++) {
+            let childImg = document.createElement("img");
+            childImg.src = "/images/strawberry.png";
+
+
+            bodyBackground.appendChild(childImg);
+        }
+    }
+}
+
 spinBtn.addEventListener("click", () => {
     if (!isRotating) {
         animateCat(1, 3);
@@ -52,6 +73,9 @@ function checkIndex(index) {
     if (0.0625 < index && index < 0.186) {
         animateCat(8, 9);
         console.log("Winner!");
+        if (animationReq)
+            cancelAnimation();
+        startParticlesEffect();
         isRotating = false;
     }
     else {
@@ -82,54 +106,73 @@ function animateCat(startFrame, endFrame) {
     }
 }
 
+/* Section below: Canvas API Heart Particles Animation */
 
 const particlesCanvas = document.getElementById("particles-canvas");
-particlesCanvas.width = 300;
-particlesCanvas.height = 400;
+particlesCanvas.width = window.innerWidth;
+particlesCanvas.height = window.innerHeight;
+
 const ctx = particlesCanvas.getContext("2d");
 
-const heartImg = new Image();
-heartImg.src = "/images/heart01.png";
+let animationReq;
+
+const heartImgs = new Array(3).fill().map(() => (new Image()));
+heartImgs[0].src = "/images/heart00.png";
+heartImgs[1].src = "/images/heart01.png";
+heartImgs[2].src = "/images/heart02.png";
+
 
 const heart = {
     x: 0,
     y: 0,
-    vx: 0.1,
-    vy: 0.5,
+    vy: 0,
+    imgIndex: 0,
     draw() {
-        ctx.drawImage(heartImg, this.x, this.y, 64, 64);
+        ctx.drawImage(heartImgs[this.imgIndex], this.x, this.y, 64, 64);
     }
 }
 
-// Fill array with objects.
-let heartObjs = new Array(4).fill().map(() => ({ ...heart }));
+// Fill the array with heart objects. The number of heart objects is proportioned to the device's screen width.
+const heartsCount = Math.floor(particlesCanvas.width * 0.15);
+let heartObjs = new Array(heartsCount).fill().map(() => ({ ...heart }));
 
-// Initial Position.
-for (let i = 0; i < heartObjs.length; i++) {
-    heartObjs[i].x = particlesCanvas.width / 2;
-    heartObjs[i].y = particlesCanvas.height + (i * 50);
+
+// Start particles effect.
+function startParticlesEffect() {
+    setInitialPostition();
+    startAnimation();
 }
 
-// Start drawing.
-heartImg.onload = () => {
-    draw();
-};
+// Initial Position.
+function setInitialPostition() {
+    for (let i = 0; i < heartObjs.length; i++) {
+        heartObjs[i].x = Math.random() * ((particlesCanvas.width - 60) - 0) + 0;
+        heartObjs[i].y = Math.random() * (particlesCanvas.height - 0) + 0;
 
-// Animate and draw.
-function draw() {
+        heartObjs[i].vy = (Math.random() * (2 - 1) + 1);
+
+        heartObjs[i].imgIndex = Math.floor((Math.random() * (3 - 0) + 0));
+    }
+}
+
+// Draw and Animate.
+function startAnimation() {
     ctx.clearRect(0, 0, particlesCanvas.width, particlesCanvas.height);
 
     for (let i = 0; i < heartObjs.length; i++) {
         heartObjs[i].draw();
 
-        // heartObjs[i].x += heartObjs[i].vx;
+
         heartObjs[i].y -= heartObjs[i].vy;
+
+        if (heartObjs[i].y < 0) {
+            heartObjs[i].vy = -heartObjs[i].vy * (Math.random() * (4 - 2) + 2);
+        }
     }
 
-    window.requestAnimationFrame(draw);
+    animationReq = window.requestAnimationFrame(startAnimation);
 }
 
-
-// TODO:
-// Scatter some random strawberries in the background.
-// Particle effect
+function cancelAnimation() {
+    window.cancelAnimationFrame(animationReq);
+}
