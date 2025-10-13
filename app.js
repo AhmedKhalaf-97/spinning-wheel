@@ -60,6 +60,7 @@ function checkIndex(index) {
     // We have a winner.
     if (0.0625 < index && index < 0.186) {
         animateCat(8, 9);
+        cheeringSFX.volume = 0.1;
         cheeringSFX.play();
         alertBox.style.display = 'block';
         if (animationReq)
