@@ -7,27 +7,6 @@ let defaultSpinSpeed = 5;
 
 let isRotating = false;
 
-let bodyBackground = document.getElementById("body-background");
-
-decorateBackground();
-
-function decorateBackground() {
-    let horizontalCount = Math.floor(window.innerWidth * 0.012);
-    let vertialCount = Math.floor(window.innerHeight * 0.009);
-
-    console.log(horizontalCount);
-    console.log(vertialCount);
-    for (let i = 0; i < horizontalCount; i++) {
-        for (let j = 0; j < vertialCount; j++) {
-            let childImg = document.createElement("img");
-            childImg.src = "/images/strawberry.png";
-
-
-            bodyBackground.appendChild(childImg);
-        }
-    }
-}
-
 spinBtn.addEventListener("click", () => {
     if (!isRotating) {
         animateCat(1, 3);
@@ -72,7 +51,6 @@ function checkIndex(index) {
 
     if (0.0625 < index && index < 0.186) {
         animateCat(8, 9);
-        console.log("Winner!");
         if (animationReq)
             cancelAnimation();
         startParticlesEffect();

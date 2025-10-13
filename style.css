@@ -19,14 +19,12 @@ body {
 
 #body-background {
     width: 100%;
+    min-height: 100vh;
+    background-image: url("images/strawberry_background.png");
+    background-repeat: repeat;
+    background-size: 50% auto;
 }
 
-#body-background img {
-    position: absolute;
-    top: 30px;
-    left: 30px;
-    margin: 30px;
-}
 
 .main {
     display: flex;
@@ -52,8 +50,8 @@ body {
     font-weight: 700;
     font-size: 48px;
     letter-spacing: 0.1rem;
-    color: #333;
-    text-shadow: 5px 5px 5px rgba(44, 40, 40, 0.4);
+    color: #00c653;
+    text-shadow: 5px 5px 5px #ffffff87;
 }
 
 #spinBtn {
@@ -95,7 +93,7 @@ body {
     border-radius: 50%;
     overflow: hidden;
     box-shadow: 0 0 0 5px rgba(0,0, 0, 0.75),
-                0 0 0 10px rgb(255, 255, 255),
+                0 0 0 10px rgb(138, 255, 120),
                 0 0 0 15px rgba(0, 0, 0, 0.75);
 }
 
