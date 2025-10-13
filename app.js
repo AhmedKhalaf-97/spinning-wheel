@@ -9,13 +9,14 @@ let isRotating = false;
 
 let alertBox = document.getElementById("alert-box");
 
+const cheeringSFX = new Audio("sfx/cheering.mp3");
+
 document.getElementById("alert-box-close-btn").addEventListener("click", () => {
     alertBox.style.display = 'none';
 });
 
 spinBtn.addEventListener("click", () => {
     if (!isRotating) {
-        navigator.vibrate(200);
         animateCat(1, 3);
         rotateWheel(randomizeRotation(), defaultSpinSpeed);
     }
@@ -59,6 +60,7 @@ function checkIndex(index) {
     // We have a winner.
     if (0.0625 < index && index < 0.186) {
         animateCat(8, 9);
+        cheeringSFX.play();
         alertBox.style.display = 'block';
         if (animationReq)
             cancelAnimation();
