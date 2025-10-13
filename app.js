@@ -10,6 +10,7 @@ let isRotating = false;
 let alertBox = document.getElementById("alert-box");
 
 const cheeringSFX = new Audio("sfx/cheering.mp3");
+cheeringSFX.volume = 0.01;
 
 document.getElementById("alert-box-close-btn").addEventListener("click", () => {
     alertBox.style.display = 'none';
@@ -60,7 +61,6 @@ function checkIndex(index) {
     // We have a winner.
     if (0.0625 < index && index < 0.186) {
         animateCat(8, 9);
-        cheeringSFX.volume = 0.1;
         cheeringSFX.play();
         alertBox.style.display = 'block';
         if (animationReq)
