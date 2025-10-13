@@ -15,6 +15,7 @@ document.getElementById("alert-box-close-btn").addEventListener("click", () => {
 
 spinBtn.addEventListener("click", () => {
     if (!isRotating) {
+        navigator.vibrate(200);
         animateCat(1, 3);
         rotateWheel(randomizeRotation(), defaultSpinSpeed);
     }
