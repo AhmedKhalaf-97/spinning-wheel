@@ -9,7 +9,7 @@ let isRotating = false;
 
 let alertBox = document.getElementById("alert-box");
 
-const cheeringSFX = new Audio("sfx/cheering1.mp3");
+const cheeringSFX = new Audio("sfx/cheering.mp3");
 cheeringSFX.volume = 0.01;
 
 document.getElementById("alert-box-close-btn").addEventListener("click", () => {
