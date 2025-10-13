@@ -127,7 +127,7 @@ function setInitialPostition() {
         heartObjs[i].x = Math.random() * ((particlesCanvas.width - 60) - 0) + 0;
         heartObjs[i].y = Math.random() * (particlesCanvas.height - 0) + 0;
 
-        heartObjs[i].vy = (Math.random() * (2 - 1) + 1);
+        heartObjs[i].vy = (Math.random() * (4 - 2) + 2);
 
         heartObjs[i].imgIndex = Math.floor((Math.random() * (3 - 0) + 0));
     }
@@ -144,7 +144,7 @@ function startAnimation() {
         heartObjs[i].y -= heartObjs[i].vy;
 
         if (heartObjs[i].y < 0) {
-            heartObjs[i].vy = -heartObjs[i].vy * (Math.random() * (4 - 2) + 2);
+            heartObjs[i].vy = -heartObjs[i].vy * (Math.random() * (8 - 4) + 4);
         }
     }
 
