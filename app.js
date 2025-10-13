@@ -7,6 +7,12 @@ let defaultSpinSpeed = 5;
 
 let isRotating = false;
 
+let alertBox = document.getElementById("alert-box");
+
+document.getElementById("alert-box-close-btn").addEventListener("click", () => {
+    alertBox.style.display = 'none';
+});
+
 spinBtn.addEventListener("click", () => {
     if (!isRotating) {
         animateCat(1, 3);
@@ -49,8 +55,10 @@ function normalizeWheelRotationDeg() {
 // upper limit: 0.186, lower limit: 0.0625
 function checkIndex(index) {
 
+    // We have a winner.
     if (0.0625 < index && index < 0.186) {
         animateCat(8, 9);
+        alertBox.style.display = 'block';
         if (animationReq)
             cancelAnimation();
         startParticlesEffect();

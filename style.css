@@ -153,3 +153,45 @@ body {
     z-index: 4;
     pointer-events: none;
 }
+
+#alert-box {
+    position: absolute;
+    top: 5%;
+    width: 300px;
+    height: 300px;
+    background-color: rgb(150, 150, 150);
+    clip-path: polygon(0% 0%, 100% 10%, 100% 70%, 70% 70%, 75% 100%, 50% 70%, 10% 75%);
+    z-index: 10;
+    display: none;
+}
+
+#alert-box::before {
+    content: 'Amount of Love Today';
+    padding-left: 15px;
+    padding-top: 50px;
+    background-color: #ff00c3;
+    font-size: x-large;
+    position: absolute;
+    width: 300px;
+    height: 90px;
+    cursor: default;
+}
+
+#alert-box span {
+    position: relative;
+    top: 45%;
+    left: 25%;
+    font-size: xx-large;
+    font-weight: bold;
+    color: #2b2828;
+    text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.15);
+    cursor: default;
+}
+
+#alert-box button {
+    position: absolute;
+    padding: 4px;
+    top: 40px;
+    right: 10px;
+    border-radius: 20px;
+}
