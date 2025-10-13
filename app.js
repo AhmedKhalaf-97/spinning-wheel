@@ -144,7 +144,7 @@ function startAnimation() {
         heartObjs[i].y -= heartObjs[i].vy;
 
         if (heartObjs[i].y < 0) {
-            heartObjs[i].vy = -heartObjs[i].vy * (Math.random() * (8 - 4) + 4);
+            heartObjs[i].vy = -heartObjs[i].vy * (Math.random() * (8 - 6) + 6);
         }
     }
 
